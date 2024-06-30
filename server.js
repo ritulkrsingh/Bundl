@@ -37,7 +37,7 @@ app.get("/", (req, res)=> {
   res.send("API works.")
 });
 
-app.listen(port, ()=> {
+app.listen(process.env.PORT || port, ()=> {
   console.log('Server running on port ' + port);
 })
 
