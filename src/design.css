@@ -1,0 +1,80 @@
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* ./parts/NavigationBar */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 30px;
+  width: 100vw; /* Ensures that the navbar takes up full width */
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box; /* Includes padding in the width */
+}
+
+.nav-logo img {
+  height: 64px;
+  margin-bottom: -16px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 16px; /* Adjust size as needed */
+}
+
+.nav-links a:hover {
+  color: #ccc; /* Change hover color */
+}
+.profile-picture img {
+  height: 40px;
+  width: 40px;
+  margin-bottom: -5px;
+}
+
+.login{
+  z-index: 1;
+  background-color: #808080;
+  display: grid;
+  width: 15vw;
+}
+
+.login-popup-container {
+  place-self: center;
+  color: #808080;
+  background-color: #808080;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  padding: 25px 30px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.login-popup-input input{
+  outline: none;
+  border: 1px solid #b8b8b8;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* ./parts/NavigationBar */
