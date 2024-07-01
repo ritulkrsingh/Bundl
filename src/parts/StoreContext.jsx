@@ -12,7 +12,7 @@ export const StoreContext = createContext({
 
 const StoreContextProvider = (props) => {
   // const url = "http://localhost:" + (process.env.PORT || 5172) + "/";
-  const url = process.env.REACT_APP_API_URL;
+  const url = import.meta.env.VITE_API_URL;
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
   const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
