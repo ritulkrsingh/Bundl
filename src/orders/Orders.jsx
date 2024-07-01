@@ -19,7 +19,11 @@ function Orders() {
       }
     };
 
-    fetchCurCart();
+    if (userId) {
+      fetchCurCart();
+    } else {
+      setCurCart({ items: [] });
+    }
   }, [url, userId]);
 
   useEffect(() => {
@@ -29,7 +33,6 @@ function Orders() {
         const cartsWithUserNames = await Promise.all(
           response.data.filter(cart => !equals(cart.user, userId)).map(async cart => {
             const userResponse = await axios.get(url + `api/user/${cart.user}`);
-            console.log("My own cart loaded", userResponse.data);
             return { ...cart, user: userResponse.data.name };
           })
         );
@@ -48,7 +51,7 @@ function Orders() {
       <div>
         <h1>Orders Page</h1>
         {userId ? (
-          curCart.items.length ? (
+          curCart.items.length > 0 ? (
             <div>
               <ShowCart cartOwner='Your Order:' cart={curCart}/>
             </div>
