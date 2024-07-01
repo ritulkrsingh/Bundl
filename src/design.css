@@ -1,9 +1,15 @@
 
+@font-face {
+  font-family: "Aptos Display";
+  src: url("assets/Aptos.ttf") format("truetype")
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: "Aptos Display", sans-serif;
 }
 
 .card {
@@ -22,36 +28,39 @@
   align-items: center;
   background-color: #333;
   color: white;
-  padding: 10px 30px;
-  width: 100vw; /* Ensures that the navbar takes up full width */
+  padding: 16px 30px;
+  width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
-  box-sizing: border-box; /* Includes padding in the width */
+  box-sizing: border-box;
 }
 
+.nav-logo, .nav-links, .profile-picture {
+  display: flex;
+  align-items: center;
+}
 .nav-logo img {
-  height: 64px;
-  margin-bottom: -16px;
+  height: 50px;
+  margin-bottom: -3px;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
   margin-left: 20px;
-  font-size: 16px; /* Adjust size as needed */
+  font-size: 17px;
 }
 
 .nav-links a:hover {
-  color: #ccc; /* Change hover color */
+  color: #ccc;
 }
 .profile-picture img {
-  height: 40px;
-  width: 40px;
-  margin-bottom: -5px;
+  height: 50px;
+  width: 50px;
 }
 
-.login{
+.login {
   z-index: 1;
   background-color: #808080;
   display: grid;
