@@ -29,6 +29,17 @@ app.use(express.static(path.join(__dirname, 'dist'), {
   }
 }));
 
+app.get('/', (req, res) => {
+  fs.readFile(path.join(__dirname, 'dist', 'index.html'), (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.setHeader('Content-Type', 'text/html');
+      res.send(data);
+    }
+  });
+});
+
 // DB connection
 const connectDB = async ()=> {
   await mongoose.connect('mongodb+srv://ritul:FptXN09XDsTxrkh7@cluster0.k8qfi6d.mongodb.net/bundl').then(
@@ -46,17 +57,6 @@ app.get("/", (req, res)=> {
 app.get("/api/restaurants", async (req, res) => {
   const restaurants = await Restaurant.find({});
   res.json(restaurants);
-});
-
-app.get('*', (req, res) => {
-  fs.readFile(path.join(__dirname, 'dist', 'index.html'), (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.setHeader('Content-Type', 'text/html');
-      res.send(data);
-    }
-  });
 });
 
 app.listen(process.env.PORT || port, ()=> {
