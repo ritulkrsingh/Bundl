@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "nodemon server.js",
-    "start": "node server.js --port=5172",
+    "start": "node server.js",
     "heroku-postbuild": "npm install && npm run build"
   },
   "dependencies": {
