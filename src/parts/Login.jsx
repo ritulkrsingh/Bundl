@@ -31,6 +31,8 @@ export default function Login({setLoginPopup}) {
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setUserId(response.data.userId);
+      localStorage.setItem("userId", response.data.userId);
+      // localStorage.setItem("userName", response.data.u);
       setLoginPopup(false);
     } else {
       alert(response.data.message);
