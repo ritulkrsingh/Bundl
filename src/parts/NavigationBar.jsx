@@ -2,7 +2,7 @@ import '../design.css'
 import {StoreContext} from "./StoreContext.jsx";
 import {useContext} from "react";
 import {Link } from "react-router-dom";
-import __Logo from '../assets/bundl.svg';
+import Logo from '../assets/bundl.svg';
 
 export default function NavigationBar({setLoginPopup}) {
 
@@ -12,7 +12,8 @@ export default function NavigationBar({setLoginPopup}) {
     <>
       <nav className="navbar">
         <div className="nav-logo">
-          <img src="../assets/bundl.svg" alt="Logo"/>
+          {/*<img src="../assets/bundl.svg" alt="Logo"/>*/}
+          <img src={Logo} alt="Logo"/>
         </div>
         <div className="nav-links">
           <a href="..">Home</a>
