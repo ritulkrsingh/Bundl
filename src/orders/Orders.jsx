@@ -29,6 +29,7 @@ function Orders() {
         const cartsWithUserNames = await Promise.all(
           response.data.filter(cart => !equals(cart.user, userId)).map(async cart => {
             const userResponse = await axios.get(url + `api/user/${cart.user}`);
+            console.log("My own cart loaded", userResponse.data);
             return { ...cart, user: userResponse.data.name };
           })
         );
