@@ -24,15 +24,16 @@ const RestaurantList = () => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       const response = await axios.get(url + 'api/restaurants');
-      setRestaurants(response.data);
+      setRestaurants(response.data ? response.data : []);
+      console.log("api/restaurants got", response.data);
     };
 
     fetchRestaurants();
-  }, []);
+  }, [url]);
 
   return (
     <div>
-      {restaurants.map((restaurant) => (
+      {restaurants ? restaurants.map((restaurant) => (
         <div key={restaurant._id}>
           <h2>
             <Link to={`/browse/${restaurant.name.split(' ').join('-')}`}>
@@ -41,7 +42,7 @@ const RestaurantList = () => {
           </h2>
           <p>{restaurant.location}</p>
         </div>
-      ))}
+      )) : <p>No restaurants found</p>}
     </div>
   );
 };
