@@ -24,6 +24,11 @@ app.use(cors());
 app.use("/api/user", userRouter)
 app.use("/api/cart", cartRouter)
 
+app.get("/api/restaurants", async (req, res) => {
+  const restaurants = await Restaurant.find({});
+  res.json(restaurants);
+});
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'dist'), {
     // setHeaders: (res, path) => {
@@ -56,11 +61,6 @@ connectDB();
 
 app.get("/", (req, res)=> {
   res.send("API works.")
-});
-
-app.get("/api/restaurants", async (req, res) => {
-  const restaurants = await Restaurant.find({});
-  res.json(restaurants);
 });
 
 app.listen(process.env.PORT || port, ()=> {
