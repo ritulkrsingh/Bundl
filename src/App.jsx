@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './design.css'
 import NavigationBar from "./parts/NavigationBar.jsx";
 import { Route, Routes } from 'react-router-dom'
-import Home from '/Home/Home.jsx'
+import Home from '/parts/Home.jsx'
 import Orders from './orders/Orders.jsx'
 import Login from '/parts/Login.jsx'
 import Account from "./account/Account.jsx";
