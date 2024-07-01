@@ -9,9 +9,12 @@ import 'dotenv/config'
 import mongoose from "mongoose";
 import Restaurant from "./models/restaurantModel.js";
 import cartRouter from "./controllers/cartController.js";
+import * as dotenv from "dotenv";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
 const app = express();
 const port = 5172;
@@ -21,28 +24,29 @@ app.use(cors());
 app.use("/api/user", userRouter)
 app.use("/api/cart", cartRouter)
 
-app.use(express.static(path.join(__dirname, 'dist'), {
-  setHeaders: (res, path) => {
-    if (path.endsWith('.jsx')) {
-      res.setHeader('Content-Type', 'application/javascript');
-    }
-  }
-}));
-
-app.get('/', (req, res) => {
-  fs.readFile(path.join(__dirname, 'dist', 'index.html'), (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.setHeader('Content-Type', 'text/html');
-      res.send(data);
-    }
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'dist'), {
+    // setHeaders: (res, path) => {
+    //   if (path.endsWith('.jsx')) {
+    //     res.setHeader('Content-Type', 'application/javascript');
+    //   }
+    // }
+  }));
+  app.get('*', (req, res) => {
+    fs.readFile(path.join(__dirname, 'dist', 'index.html'), (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.setHeader('Content-Type', 'text/html');
+        res.send(data);
+      }
+    });
   });
-});
+}
 
 // DB connection
 const connectDB = async ()=> {
-  await mongoose.connect('mongodb+srv://ritul:FptXN09XDsTxrkh7@cluster0.k8qfi6d.mongodb.net/bundl').then(
+  await mongoose.connect(process.env.MONGODB_URI).then(
     () => {
       console.log('Connected to MongoDB.');
     });
