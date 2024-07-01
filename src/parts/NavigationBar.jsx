@@ -1,19 +1,12 @@
 import '../design.css'
 import {StoreContext} from "./StoreContext.jsx";
 import {useContext} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link } from "react-router-dom";
+import __Logo from '../assets/bundl.svg';
 
 export default function NavigationBar({setLoginPopup}) {
 
-  const {token,setToken} = useContext(StoreContext);
-
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    setToken('');
-    navigate('/');
-  }
+  const {token} = useContext(StoreContext);
 
   return (
     <>

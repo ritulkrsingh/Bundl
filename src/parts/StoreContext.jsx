@@ -11,7 +11,6 @@ export const StoreContext = createContext({
 });
 
 const StoreContextProvider = (props) => {
-  // const url = "http://localhost:" + (process.env.PORT || 5172) + "/";
   const url = import.meta.env.VITE_API_URL;
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
