@@ -25,7 +25,7 @@ const RestaurantList = () => {
     const fetchRestaurants = async () => {
       const response = await axios.get(url + 'api/restaurants');
       setRestaurants(response.data ? response.data : []);
-      console.log("api/restaurants got", response.data);
+      console.log(url + "api/restaurants got", response.data);
     };
 
     fetchRestaurants();
