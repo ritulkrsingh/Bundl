@@ -1,4 +1,6 @@
 import {useState, createContext, useEffect} from "react";
+import express from 'express';
+import 'dotenv/config'
 
 export const StoreContext = createContext({
   url: "http://localhost:5172/",
@@ -11,8 +13,8 @@ export const StoreContext = createContext({
 });
 
 const StoreContextProvider = (props) => {
-
-  const url = "http://localhost:5172/";
+  console.log("PORTPORTPORTPORTPORT", process.env.PORT);
+  const url = "http://localhost:" + (process.env.PORT || 5172) + "/";
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [userId, setUserId] = useState(localStorage.getItem('userId') || '');
   const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
