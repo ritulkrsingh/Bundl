@@ -1,7 +1,6 @@
-
 @font-face {
   font-family: "Aptos Display";
-  src: url("assets/Aptos.ttf") format("truetype")
+  src: url("assets/Aptos.ttf") format("truetype");
 }
 
 #root {
@@ -19,71 +18,3 @@
 .read-the-docs {
   color: #888;
 }
-
-/* ./parts/NavigationBar */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  padding: 16px 30px;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-}
-
-.nav-logo, .nav-links, .profile-picture {
-  display: flex;
-  align-items: center;
-}
-.nav-logo img {
-  height: 50px;
-  margin-bottom: -3px;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-  font-size: 17px;
-}
-
-.nav-links a:hover {
-  color: #ccc;
-}
-.profile-picture img {
-  height: 50px;
-  width: 50px;
-}
-
-.login {
-  z-index: 1;
-  background-color: #808080;
-  display: grid;
-  width: 15vw;
-}
-
-.login-popup-container {
-  place-self: center;
-  color: #808080;
-  background-color: #808080;
-  display: flex;
-  flex-direction: row;
-  gap: 25px;
-  padding: 25px 30px;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-.login-popup-input input{
-  outline: none;
-  border: 1px solid #b8b8b8;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-/* ./parts/NavigationBar */
