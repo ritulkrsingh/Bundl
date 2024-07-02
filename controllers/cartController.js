@@ -19,8 +19,12 @@ cartRouter.post('/', async (req, res) => {
   if (itemIndex > -1) {
     const item = cart.items[itemIndex];
     item.quantity += quantity;
-    cart.items[itemIndex] = item;
-  } else {
+    if (item.quantity <= 0) {
+      cart.items.splice(itemIndex, 1);
+    } else {
+      cart.items[itemIndex] = item;
+    }
+  } else if (quantity > 0) {
     cart.items.push({ food, restaurantName, quantity });
   }
 

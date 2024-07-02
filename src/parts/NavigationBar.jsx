@@ -1,11 +1,12 @@
 import '../design.css'
+import './NavigationBar.css'
 import {StoreContext} from "./StoreContext.jsx";
 import {useContext} from "react";
 import {Link } from "react-router-dom";
 import Logo from '../assets/bundl.svg';
 import ProfileIcon from '../assets/profile.svg';
 
-export default function NavigationBar({setLoginPopup}) {
+export default function NavigationBar({setLoginPopup, setLoginMode}) {
 
   const {token} = useContext(StoreContext);
 
@@ -20,7 +21,10 @@ export default function NavigationBar({setLoginPopup}) {
           {/*<a href="../account/">View account</a>*/}
           <Link to="/orders" className="orders-link">View Orders</Link>
           {!token ? (
-              <button onClick={() => setLoginPopup(true)}>Sign In</button>
+            <>
+              <a onClick={() => {setLoginPopup(true); setLoginMode("Login")}}>Login</a>
+              <a onClick={() => {setLoginPopup(true); setLoginMode("Sign Up")}}>Sign Up</a>
+            </>
             ) : (
               <a href="/account" className="profile-picture">
                <img src={ProfileIcon} alt="Profile Picture"/>

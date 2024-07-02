@@ -6,23 +6,31 @@ import Home from '/parts/Home.jsx'
 import Orders from './orders/Orders.jsx'
 import Login from '/parts/Login.jsx'
 import Account from "./account/Account.jsx";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 function App() {
 
   const [loginPopup, setLoginPopup] = useState(false)
+  const [loginMode, setLoginMode] = useState("Login")
 
   return (
-    <>
-      {loginPopup ? <Login setLoginPopup={setLoginPopup} /> : <> </>}
+    <ThemeProvider theme={darkTheme}>
+      {loginPopup ? <Login setLoginPopup={setLoginPopup} loginMode={loginMode} setLoginMode={setLoginMode}/> : <> </>}
       <div>
-        <NavigationBar setLoginPopup={setLoginPopup} />
+        <NavigationBar setLoginPopup={setLoginPopup} setLoginMode={setLoginMode} />
         <Routes>
           <Route path='*' element={<Home />}/>
           <Route path='/orders' element={<Orders />}/>
           <Route path='/account' element={<Account />}/>
         </Routes>
       </div>
-    </>
+    </ThemeProvider>
   )
 }
 
