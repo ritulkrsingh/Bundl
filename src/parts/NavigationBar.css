@@ -1,0 +1,38 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 20px 30px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.nav-logo, .nav-links, .profile-picture {
+    display: flex;
+    align-items: center;
+}
+.nav-logo img {
+    height: 40px;
+    margin-bottom: -3px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 17px;
+}
+
+.nav-links a:hover {
+    color: #ccc;
+    cursor: pointer;
+}
+.profile-picture img {
+    height: 50px;
+    width: 50px;
+}
