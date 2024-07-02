@@ -29,9 +29,9 @@ export default function Menu() {
     fetchRestaurant();
   }, [url, restaurantName]);
 
-  useEffect(() => {
-    // quantity changed
-  }, [curCart]);
+  // useEffect(() => {
+  //   // quantity changed
+  // }, [curCart]);
 
   const addToCart = async (foodItem, amount) => {
     if (!userId) {

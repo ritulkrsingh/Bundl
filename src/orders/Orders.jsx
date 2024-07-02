@@ -4,6 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import equals from "validator/es/lib/equals.js";
 import { GetUserCart } from "../parts/getUserCart.jsx";
+import {Card, CardContent} from "@mui/material";
 
 function Orders() {
   const { userId,  userName, url  } = useContext(StoreContext);
@@ -34,7 +35,7 @@ function Orders() {
 
   return (
     <>
-      <div>
+      <div style={{ paddingTop: '50px', paddingBottom: '10px' }}>
         <h1>Orders Page</h1>
         {userId ? (
           curCart.items.length > 0 ? (
@@ -47,21 +48,18 @@ function Orders() {
         ) : (
           <div> Login to view your cart. </div>
         )}
-        Others' Orders:
+        <h2> Others&apos; Orders: </h2>
         <div>
           {carts.map((cart) => (
-            <div key={cart._id}>
-              <ShowCart cartOwner={cart.user} cart={cart}/>
-            </div>
+            <ShowCart key={cart.user} cartOwner={cart.user} cart={cart}/>
           ))}
         </div>
-        <a href={`/../`}>Go Back</a>
       </div>
     </>
   )
 }
 
-function ShowCart({ cartOwner, cart }) {
+function ShowCart({cartOwner, cart}) {
   const groupedItems = cart.items.reduce((groups, item) => {
     const group = groups[item.restaurantName] || [];
     group.push(item);
@@ -70,22 +68,29 @@ function ShowCart({ cartOwner, cart }) {
   }, {});
 
   return (
+    <Card key={cart._id} sx={{ width: '40vw', marginBottom: 2, borderRadius: '10px', paddingX: 0, bgcolor: '#292d36' }}>
+      <CardContent>
+        <h2 style={{ marginTop: 6, marginLeft: 14 }}>{cartOwner}</h2>
+        {Object.entries(groupedItems).map(([restaurantName, items], i, array) => (
+          <Card key={restaurantName} sx={{ marginTop: 2, marginBottom: i === array.length - 1 ? -1 : 2, borderRadius: '10px', paddingY: 0 }} elevation={1}>
+            <CardContent sx={{ padding: 0 }}>
+              <h3 style={{ marginTop: 6, marginLeft: 14, textAlign: 'left' }}>{restaurantName}</h3>
 
-    <div>
-      <h2>{cartOwner}</h2>
-      {Object.entries(groupedItems).map(([restaurantName, items]) => (
-        <div key={restaurantName}>
-          <h3>{restaurantName}</h3>
-          <ul>
-            {items.map((item) => (
-              <li key={item.food._id}>
-                {item.food.name}: {item.quantity}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
+              <Card sx={{marginTop: -1.5, marginBottom: -3, borderRadius: '10px', paddingX: 2}} elevation={3}>
+                <ul style={{listStyleType: 'none', padding: 0}}>
+                  {items.map((item) => (
+                    <li key={item.food._id} style={{display: 'flex', justifyContent: 'space-between'}}>
+                      <span>{item.food.name}</span>
+                      <span>{item.quantity}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            </CardContent>
+          </Card>
+        ))}
+      </CardContent>
+    </Card>
   );
 }
 

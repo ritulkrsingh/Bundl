@@ -13,9 +13,11 @@ export default function NavigationBar({setLoginPopup, setLoginMode}) {
   return (
     <>
       <nav className="navbar">
+        <Link to=".." className="orders-link">
         <div className="nav-logo">
           <img src={Logo} alt="Logo"/>
         </div>
+        </Link>
         <div className="nav-links">
           <a href="..">Home</a>
           {/*<a href="../account/">View account</a>*/}
