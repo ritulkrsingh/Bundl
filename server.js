@@ -4,12 +4,16 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import fs from 'fs';
-import userRouter from "./controllers/userController.js";
 import 'dotenv/config'
 import mongoose from "mongoose";
 import Restaurant from "./models/restaurantModel.js";
+import userRouter from "./controllers/userController.js";
 import cartRouter from "./controllers/cartController.js";
+import chatRouter from "./controllers/chatController.js";
+import { initSocket } from "./controllers/chatController.js";
 import * as dotenv from "dotenv";
+import { Server } from 'socket.io';
+import http from 'http';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -17,13 +21,14 @@ const __dirname = dirname(__filename);
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
 const app = express();
-const port = 5172;
+const server = http.createServer(app);
 
 app.use(express.json());
 app.use(cors());
-app.use("/api/user", userRouter)
-app.use("/api/cart", cartRouter)
-
+initSocket(server);
+app.use("/api/user", userRouter);
+app.use("/api/cart", cartRouter);
+app.use('/api', chatRouter);
 app.get("/api/restaurants", async (req, res) => {
   const restaurants = await Restaurant.find({});
   res.json(restaurants);
@@ -63,6 +68,7 @@ app.get("/", (req, res)=> {
   res.send("API works.")
 });
 
-app.listen(process.env.PORT || port, ()=> {
+const port = process.env.PORT || 5172;
+server.listen(port, ()=> {
   console.log('Server running on port ' + port);
 });

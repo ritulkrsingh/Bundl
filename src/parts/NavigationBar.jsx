@@ -12,7 +12,7 @@ export default function NavigationBar({setLoginPopup, setLoginMode}) {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar" style={{ zIndex: 99999 }}>
         <Link to=".." className="orders-link">
         <div className="nav-logo">
           <img src={Logo} alt="Logo"/>
