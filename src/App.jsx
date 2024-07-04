@@ -27,7 +27,7 @@ function App() {
         <Routes>
           <Route path='*' element={<Home />}/>
           <Route path='/orders' element={<Orders />}/>
-          <Route path='/account' element={<Account />}/>
+          <Route path='/account' element={<Account setLoginPopup={setLoginPopup} setLoginMode={setLoginMode} />}/>
         </Routes>
       </div>
     </ThemeProvider>

@@ -24,8 +24,8 @@ export default function NavigationBar({setLoginPopup, setLoginMode}) {
           <Link to="/orders" className="orders-link">View Orders</Link>
           {!token ? (
             <>
-              <a onClick={() => {setLoginPopup(true); setLoginMode("Login")}}>Login</a>
-              <a onClick={() => {setLoginPopup(true); setLoginMode("Sign Up")}}>Sign Up</a>
+              <a onClick={() => {setLoginPopup(true); setLoginMode("login")}}>Login</a>
+              <a onClick={() => {setLoginPopup(true); setLoginMode("register")}}>Sign Up</a>
             </>
             ) : (
               <a href="/account" className="profile-picture">

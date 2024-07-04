@@ -3,6 +3,9 @@ import userModel from "../models/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import chatModel from "../models/chatModel.js";
+import cartModel from "../models/cartModel.js";
+import {useContext} from "react";
 
 const userRouter = express.Router();
 
@@ -26,10 +29,37 @@ userRouter.post('/login', async (req, res) => {
     }
 
     const token = createToken(user._id);
-    res.json({success: true, token, userId: user._id});
+    res.json({success: true, token, userId: user._id, userName: user.name});
   } catch (error) {
     console.log(error);
-    res.json({success: false, message: 'Error logging in'});
+    res.json({success: false, message: 'Error logging in!'});
+  }
+});
+
+userRouter.post('/delete', async (req, res) => {
+  const {userId, password} = req.body;
+  try {
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.json({success: false, message: 'User not found!'});
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.json({success: false, message: 'Invalid password!'});
+    }
+
+    await userModel.findByIdAndDelete(userId);
+    await chatModel.deleteMany({ sender: userId });
+    await chatModel.deleteMany({ receiver: userId });
+    await cartModel.deleteOne({ user: userId });
+
+    res.json({success: true, message: 'User and associated chats deleted successfully...'});
+  } catch (error) {
+    console.log(error);
+    res.json({success: false, message: 'Error logging in!'});
   }
 });
 
@@ -54,7 +84,7 @@ userRouter.post('/register', async (req, res) => {
 
     const user = await newUser.save();
     const token = createToken(user._id);
-    res.json({success:true, token, userId: user._id});
+    res.json({success:true, token, userId: user._id, userName: user.name});
   } catch (error) {
     console.log(error);
     res.json({success:false, message:"Error in creating user"});
