@@ -4,7 +4,7 @@ import NavigationBar from "./parts/NavigationBar.jsx";
 import { Route, Routes } from 'react-router-dom'
 import Home from '/parts/Home.jsx'
 import Orders from './orders/Orders.jsx'
-import Login from '/parts/Login.jsx'
+import AuthenticationDialog from '/parts/AuthenticationDialog.jsx'
 import Account from "./account/Account.jsx";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -17,11 +17,11 @@ const darkTheme = createTheme({
 function App() {
 
   const [loginPopup, setLoginPopup] = useState(false)
-  const [loginMode, setLoginMode] = useState("Login")
+  const [loginMode, setLoginMode] = useState("AuthenticationDialog")
 
   return (
     <ThemeProvider theme={darkTheme}>
-      {loginPopup ? <Login setLoginPopup={setLoginPopup} loginMode={loginMode} setLoginMode={setLoginMode}/> : <> </>}
+      {loginPopup ? <AuthenticationDialog setLoginPopup={setLoginPopup} loginMode={loginMode} setLoginMode={setLoginMode}/> : <> </>}
       <div>
         <NavigationBar setLoginPopup={setLoginPopup} setLoginMode={setLoginMode} />
         <Routes>
