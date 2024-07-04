@@ -18,13 +18,16 @@ import axios from 'axios';
 
 export default function Login({ setLoginPopup, loginMode, setLoginMode }) {
 
-  const {url, setToken, setUserId} = useContext(StoreContext)
+  const {url, userId, setToken, setUserId, setUserName} = useContext(StoreContext)
 
   const [data, setData] = React.useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
+    text: ""
   });
+
+  const confirmationText = 'I want to delete my account and all my data.';
 
   const onChangeHandler = (event) => {
     const name = event.target.name;
@@ -32,18 +35,29 @@ export default function Login({ setLoginPopup, loginMode, setLoginMode }) {
     setData(data => ({...data, [name]: value}));
   }
 
-  const onLogin = async (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log('onLogin called');
-    let newUrl = url + "api/user/" + (loginMode === "Login" ? "login" : "register");
 
-    const response = await axios.post(newUrl, data);
+    if (loginMode === "delete" && data.text !== confirmationText) {
+      alert("The confirmation text does not match. Please type the exact text to confirm deletion.");
+      return;
+    }
+
+    let apiUrl = url + "api/user/" + loginMode;
+    data.userId = userId;
+
+    const response = await axios.post(apiUrl, data);
 
     if (response.data.success) {
-      setToken(response.data.token);
-      localStorage.setItem("token", response.data.token);
-      setUserId(response.data.userId);
-      localStorage.setItem("userId", response.data.userId);
+      if (loginMode !== "delete") {
+        setToken(response.data.token);
+        setUserId(response.data.userId);
+        setUserName(response.data.userName);
+      } else {
+        setToken('');
+        setUserId('');
+        setUserName('');
+      }
       setLoginPopup(false);
     } else {
       alert(response.data.message);
@@ -80,25 +94,37 @@ export default function Login({ setLoginPopup, loginMode, setLoginMode }) {
             <CloseIcon />
           </IconButton>
           <Typography mt={3} variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
-            {loginMode}
+            { loginMode === "login" ? "Login" : (loginMode === "register" ? "Sign Up" : "Delete Account") }
           </Typography>
         </DialogTitle>
         <DialogContent>
-          <form onSubmit={onLogin}>
-            {loginMode !== "Login" &&
+          <form onSubmit={onSubmit}>
+            { loginMode === "register" &&
               <Box mb={2} mt={2}>
                 <TextField name='name' onChange={onChangeHandler} value={data.name} type="text" label='Your Name' required fullWidth/>
               </Box>
             }
+            { loginMode !== "delete" &&
+              <Box mb={2} mt={2}>
+                <TextField name='email' onChange={onChangeHandler} value={data.email} type="email" label='Your Email' required fullWidth/>
+              </Box>
+            }
             <Box mb={2} mt={2}>
-              <TextField name='email' onChange={onChangeHandler} value={data.email} type="email" label='Your Email' required fullWidth/>
-            </Box>
-            <Box mb={2}>
               <TextField name='password' onChange={onChangeHandler} value={data.password} type="password" label='Password' required fullWidth/>
             </Box>
+            { loginMode === "delete" &&
+              ( <>
+                <Box mb={2} mt={2}>
+                  <TextField name='text' onChange={onChangeHandler} value={data.text} type="text" label='Type in the text below' required fullWidth/>
+                </Box>
+                <Typography variant="h6" color="text.secondary" mt={2}>
+                  {confirmationText}
+                </Typography>
+              </> )
+            }
             <DialogActions>
               <Button type='submit' color="primary">
-                {loginMode === "Sign Up" ? "Create account" : "Login"}
+                { loginMode === "login" ? "Login" : (loginMode === "register" ? "Create Account" : "Delete Account") }
               </Button>
             </DialogActions>
           </form>
