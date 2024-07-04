@@ -27,10 +27,12 @@ cartRouter.post('/', async (req, res) => {
   } else if (quantity > 0) {
     cart.items.push({ food, restaurantName, quantity });
   }
-
-  const updatedCart = await cart.save();
-
-  res.json(updatedCart);
+  if (cart.items.length === 0) {
+    await Cart.findByIdAndDelete(cart._id);
+  } else {
+    const updatedCart = await cart.save();
+    res.json(updatedCart);
+  }
 });
 
 cartRouter.delete('/:itemId', async (req, res) => {

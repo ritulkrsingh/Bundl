@@ -49,8 +49,6 @@ router.post('/message', async (req, res) => {
 router.get('/chatHistory', async (req, res) => {
   const { user1, user2 } = req.query;
 
-  console.log("CHAT HISTORY CALLED!");
-
   try {
     const chatHistory = await Chat.find({
       $or: [

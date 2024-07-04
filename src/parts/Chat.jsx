@@ -6,27 +6,35 @@ import axios from 'axios';
 import SendIcon from '@mui/icons-material/Send';
 
 
-function ChatMessage({ message, isOwnMessage }) {
+function ChatMessage({ message, isOwnMessage, timestamp }) {
+  const readableTimestamp = new Date(timestamp).toLocaleString();
+
   return (
-    <Box
-      sx={{
-        alignSelf: isOwnMessage ? 'flex-end' : 'flex-start',
-        mb: 1,
-        minWidth: '15%'
-      }}
-    >
-      <Card
+    <>
+      <Box
         sx={{
-          borderRadius: 2,
-          p: 1,
-          bgcolor: isOwnMessage ? 'primary.main' : 'grey.300',
-          color: isOwnMessage ? 'primary.contrastText' : 'primary.contrastText',
-          maxHeight: '20px',
+          alignSelf: isOwnMessage ? 'flex-end' : 'flex-start',
+          mb: 1,
+          minWidth: '15%'
         }}
+        title={readableTimestamp}
       >
-        <Typography variant="body1" style={{ textAlign: isOwnMessage ? 'right' : 'left' }}>{message}</Typography>
-      </Card>
-    </Box>
+        <Card
+          sx={{
+            borderRadius: 2,
+            p: 1,
+            bgcolor: isOwnMessage ? 'primary.main' : 'grey.300',
+            color: isOwnMessage ? 'primary.contrastText' : 'primary.contrastText',
+            maxHeight: '20px',
+          }}
+        >
+          <Typography variant="body1" style={{ textAlign: isOwnMessage ? 'right' : 'left' }}>{message}</Typography>
+        </Card>
+      </Box>
+      <Typography variant="caption" mt={-1} mb={0.3} style={{ textAlign: isOwnMessage ? 'right' : 'left', display: 'block', fontSize: '0.7rem' }}>
+        {readableTimestamp}
+      </Typography>
+    </>
   );
 }
 
@@ -100,6 +108,7 @@ function Chat( {chatUser} ) {
                 key={index}
                 message={message.message}
                 isOwnMessage={message.sender === userId}
+                timestamp={message.timestamp}
               />
           ))}</div>
           <form style={{ display: 'flex', paddingBottom: '15px', width: '100%', marginTop: '8px' }} onSubmit={(e) => {sendMessage(e)}}>
