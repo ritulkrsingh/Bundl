@@ -1,8 +1,21 @@
-# React + Vite
+## Bundl
+A food delivery app that allows users to bundle their orders with others in their area to save on delivery costs.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Features
+- Browse restaurants and add food orders from multiple restaurants to your cart.
+- View what others are ordering in your locations.
+- Chat with other users to Bundl together your orders and save on delivery costs.
 
-Currently, two official plugins are available:
+### Technologies Used
+- **Frontend**: React.js for building a dynamic and interactive user interface.
+- **Backend**: Node.js with Express.js framework for handling server-side logic and API requests.
+- **Database**: MongoDB for storing user data, restaurant information, and order details.
+- **Styling**: Material-UI for a polished, intuitive, and responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Todo
+- Incorporate Google OAuth
+- Implement locations and time of order
+- Add GrabFood data
+- Encrypt chat messages
+- Implement Bill Splitting
+- Implement phone layout
