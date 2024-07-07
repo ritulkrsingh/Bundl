@@ -46,7 +46,6 @@ function ShowAllCarts({chatUser, setChatUser}) {
           })
         );
         setCarts(cartsWithUserNames);
-        console.log("Other Carts Loaded", cartsWithUserNames);
       } catch (error) {
         console.error('Error fetching carts:', error);
       }
