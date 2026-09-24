@@ -1,9 +1,10 @@
+import 'dotenv/config';
 import mongoose from 'mongoose';
 import Food from './models/foodModel.js';
 import Restaurant from './models/restaurantModel.js';
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://<user>:<password>@<cluster>.mongodb.net/bundl', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

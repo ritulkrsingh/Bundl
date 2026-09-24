@@ -23,3 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# secrets stay local
+.env
+.env.*
+!.env.example
