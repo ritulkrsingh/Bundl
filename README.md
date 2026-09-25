@@ -5,6 +5,7 @@ pool their orders. Browse restaurants, see what others nearby are ordering, chat
 to coordinate, and split one delivery fee instead of paying several.
 
 Built for [NUS Orbital](https://orbital.comp.nus.edu.sg/) (CP2106), summer 2024.
+A longer write-up is at [ishan-agarwal.com/work/bundl](https://ishan-agarwal.com/work/bundl).
 
 ## Attribution
 
@@ -39,8 +40,8 @@ on Heroku's free tier and is long since dead.
 ## What we'd have built next
 
 Automatic matching by location and order time, Google OAuth, live GrabFood
-data, encrypted chat, bill splitting, and a proper mobile layout. It was a summer project and it stopped
-when the summer did.
+data, encrypted chat, bill splitting, and a proper mobile layout. It was a
+summer project and it stopped when the summer did.
 
 ## Honest scope
 
